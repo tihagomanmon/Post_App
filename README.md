@@ -36,3 +36,8 @@ During production time after flow implementation in IO thread app crashed withou
 *	Retrofit
 *	Glide
 *	Navigation component
+
+
+gradlew -Dorg.gradle.java.home=C:\PROGRA~1\Java\jdk-11.0.11 --quiet clean
+gradlew -Dorg.gradle.java.home=C:\PROGRA~1\Java\jdk-11.0.11 --quiet assembleDebug
+gradlew -Dorg.gradle.java.home=C:\PROGRA~1\Java\jdk-11.0.11 --quiet installDebug
