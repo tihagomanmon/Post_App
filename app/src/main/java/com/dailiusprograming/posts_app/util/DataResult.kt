@@ -2,6 +2,7 @@ package com.dailiusprograming.posts_app.util
 
 import com.dailiusprograming.posts_app.data.model.Error
 
+@Suppress("unused")
 data class DataResult<out T>(
     val status: Status,
     val data: T?,

@@ -1,6 +1,5 @@
 package com.dailiusprograming.posts_app.repository
 
-import android.util.Log
 import com.dailiusprograming.posts_app.data.local.PostsDao
 import com.dailiusprograming.posts_app.data.model.Posts
 import com.dailiusprograming.posts_app.data.model.relations.PostAndUser
@@ -13,6 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import timber.log.Timber
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -39,15 +39,15 @@ class Repository @Inject constructor(
 
             val localData = fetchPostsCache()
             when (localData.data?.isNullOrEmpty()) {
-                true -> Log.i(TAG, "Local data is EMPTY")
+                true -> Timber.tag(TAG).i("Local data is EMPTY")
                 false -> {
-                    Log.i(TAG, "Local data is AVAILABLE")
+                    Timber.tag(TAG).i("Local data is AVAILABLE")
                     emit(localData)
                 }
             }
         }
             .catch { e ->
-                Log.i(TAG, "ERROR_1: ${e.message}")
+                Timber.tag(TAG).i("ERROR_1: ${e.message}")
                 emit(DataResult.error(e.message.toString(), null))
             }
             .flowOn(Dispatchers.IO)
@@ -66,7 +66,7 @@ class Repository @Inject constructor(
             emit(fetchPostAndUserCache(postId))
 
         }.catch { e ->
-            Log.i(TAG, "ERROR_2: ${e.message}")
+            Timber.tag(TAG).i( "ERROR_2: ${e.message}")
             emit(DataResult.error(e.message.toString(), null))
         }.flowOn(Dispatchers.IO)
     }
